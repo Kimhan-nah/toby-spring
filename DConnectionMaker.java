@@ -1,10 +1,12 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DConnectionMaker implements ConnectionMaker {
     @Override
     public Connection makeConnection() throws ClassNotFoundException, SQLException {
-        // Connection 생성하는 코드
-        return null;
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book1234");
+        return c;
     }
 }
