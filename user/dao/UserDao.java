@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import user.domain.User;
 
 public class UserDao {
+    /**
+     * 싱글톤이 멀티스레드 환경에서 서비스 형태의 오브젝트로 사용되는 경우에는 상태 정보가 없는 무상태(stateless) 방식으로 만들어져야 하는데,
+     * ConnectionMaker처럼 읽기 전용 정보이거나, 자신이 사용하는 다른 싱글톤 빈을 저장하려는 용도라면 인스턴스 변수를 사용해도 괜찮다.
+     * 스프링이 한 번 초기화해주고 나면 이후에는 수정되지 않기 때문에 멀티스레드 환경에서 사용해도 아무런 문제가 없다.
+     */
     private ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
