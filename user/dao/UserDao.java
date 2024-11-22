@@ -15,6 +15,16 @@ public class UserDao {
      */
     private ConnectionMaker connectionMaker;
 
+    public UserDao() {
+        // 1. 의존관계 주입(dependency injection) -> UserDao도 Bean이어야 함
+        DaoFactory daoFactory = new DaoFactory();
+        this.connectionMaker = daoFactory.connectionMaker();
+
+        // 2. 의존관계 검색(dependency lookup) -> 검색하는 오브젝트는 자신이 Bean일 필요 없음
+        // ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        // this.connectionMaker = context.getBean("connectionMaker", ConnectionMaker.class);
+    }
+
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
